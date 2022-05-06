@@ -1,0 +1,25 @@
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: ApiInstance
+metadata:
+  name: api
+spec:
+  address: http://0.0.0.0:${PORT}
+  services:
+    httpbin:
+      address: https://httpbin.org:443
+      routes:
+        - rules:
+            - path: /api/httpbin(/.*)
+    jsonplaceholder:
+      address: https://jsonplaceholder.typicode.com:443/
+      routes:
+        - rules:
+            - path: /api(/users/.*)
+            - path: /api(/comments/.*)
+  policies:
+    - policyRef:
+        name: http-basic-authentication-flex
+      config:
+        username: foo
+        password: bar

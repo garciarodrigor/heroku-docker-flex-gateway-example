@@ -1,7 +1,18 @@
-FROM nginx:1.21.6
+FROM mulesoft/flex-gateway:1.0.0
 
-COPY default.conf.template /etc/nginx/conf.d/default.conf.template
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY static-html /usr/share/nginx/html
+ARG ANYPOINT_URL=https://anypoint.mulesoft.com
+ARG ORGANIZATION_ID
+ARG NAME
+ARG TOKEN
 
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+RUN /usr/local/bin/flexctl register ${NAME} --connected=false --token=${TOKEN} --organization=${ORGANIZATION_ID} --anypoint-url=${ANYPOINT_URL} -d /etc/mulesoft/flex-gateway \
+  && mv /etc/mulesoft/flex-gateway/*.conf /etc/mulesoft/flex-gateway/platform.conf \
+  && mv /etc/mulesoft/flex-gateway/*.pem /etc/mulesoft/flex-gateway/platform.pem \
+  && mv /etc/mulesoft/flex-gateway/*.key /etc/mulesoft/flex-gateway/platform.key \
+  && chmod 600 /etc/mulesoft/flex-gateway/platform.*
+
+ENV FLEX_RTM_ARM_AGENT_CONFIG=/etc/mulesoft/flex-gateway/platform.conf
+
+COPY entrypoint /etc/cont-init.d/configure
+
+COPY config/ /etc/mulesoft/flex-gateway/conf.d
