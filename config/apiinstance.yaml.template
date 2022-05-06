@@ -10,13 +10,13 @@ spec:
       address: https://httpbin.org:443
       routes:
         - rules:
-            - path: /api/httpbin(/.*)
+          - path: /api/httpbin(/.*)
     jsonplaceholder:
-      address: https://jsonplaceholder.typicode.com:443/
+      address: https://jsonplaceholder.typicode.com:443
       routes:
         - rules:
-            - path: /api(/users/.*)
-            - path: /api(/comments/.*)
+          - path: /api(/users/.*)
+          - path: /api(/comments/.*)
   policies:
     - policyRef:
         name: http-basic-authentication-flex

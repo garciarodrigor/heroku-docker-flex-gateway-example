@@ -20,6 +20,7 @@ git clone git@github.com:garciarodrigor/heroku-docker-flex-gateway-example.git
 cd heroku-docker-flex-gateway-example
 heroku container:login
 heroku create
+heroku config:set PLATFORM_CONF=<register-conf-base64> PLATFORM_PEM=<register-pem-base64> PLATFORM_KEY=<register-key-base64>
 heroku container:push web
 heroku container:release web
 heroku open
