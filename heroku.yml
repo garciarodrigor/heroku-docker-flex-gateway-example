@@ -1,8 +1,9 @@
-build:
+setup:
   config:
     ANYPOINT_URL: https://anypoint.mulesoft.com
     ORGANIZATION_ID:
     NAME:
     TOKEN:
+build:
   docker:
     web: Dockerfile
