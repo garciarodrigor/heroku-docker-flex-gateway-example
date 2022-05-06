@@ -1,9 +1,8 @@
 setup:
   config:
-    ANYPOINT_URL: https://anypoint.mulesoft.com
-    ORGANIZATION_ID:
-    NAME:
-    TOKEN:
+    PLATFORM_CONF:
+    PLATFORM_KEY:
+    PLATFORM_PEM:
 build:
   docker:
     web: Dockerfile
