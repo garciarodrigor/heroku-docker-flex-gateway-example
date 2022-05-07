@@ -19,7 +19,8 @@ COPY entrypoint /etc/cont-init.d/configure
 
 RUN useradd -d /app non-root-user \
   && mkdir -p /app /var/log /var/run/s6 \
-  && chown non-root-user /app /var/log /var/run/s6
+  && chown non-root-user /app /var/log /var/run/s6 \
+  && rm -rf /var/log && ln -sf /tmp /var/log
 
 USER non-root-user
 WORKDIR /app
