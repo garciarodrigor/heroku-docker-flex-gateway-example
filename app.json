@@ -3,5 +3,20 @@
   "description": "A barebones Flex Gateway installation using Docker",
   "repository": "https://github.com/garciarodrigor/heroku-docker-flex-gateway-example",
   "keywords": ["flex", "gateway", "mulesoft", "docker", "proxy"],
-  "stack": "container"
+  "stack": "container",
+  "website": "https://docs.mulesoft.com/gateway/flex-gateway-overview",
+  "env": {
+    "PLATFORM_CONF": {
+      "description": ".conf file from register step in base64",
+      "required": true
+    },
+    "PLATFORM_PEM": {
+      "description": ".pem file from register step in base64",
+      "required": true
+    },
+    "PLATFORM_KEY": {
+      "description": ".key file from register step in base64",
+      "required": true
+    }
+  }
 }
