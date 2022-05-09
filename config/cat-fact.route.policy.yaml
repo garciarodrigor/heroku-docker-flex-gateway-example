@@ -1,0 +1,18 @@
+# Policy apply example
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: PolicyBinding
+metadata:
+  name: api-cat-fact-route
+spec:
+  targetRef:
+    name: api
+  policyRef:
+    name: route
+  config:
+    destinationRef:
+      name: cat-fact
+    destinationPath: /facts
+  rules:
+  - path: /api/cat(/facts)
+

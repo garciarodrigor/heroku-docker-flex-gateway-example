@@ -1,8 +1,11 @@
+# ApiInstance inline definition example
 ---
 apiVersion: gateway.mulesoft.com/v1alpha1
 kind: ApiInstance
 metadata:
   name: api
+  labels:
+    policy/10-per-minute-ratelimit: "true"
 spec:
   address: http://0.0.0.0:${PORT}
   services:
@@ -17,9 +20,9 @@ spec:
         - rules:
           - path: /api(/users/.*)
           - path: /api(/comments/.*)
-  policies:
-    - policyRef:
-        name: http-basic-authentication-flex
-      config:
-        username: foo
-        password: bar
+  # policies:
+  #   - policyRef:
+  #       name: http-basic-authentication-flex
+  #     config:
+  #       username: foo
+  #       password: bar

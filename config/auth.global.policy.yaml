@@ -1,0 +1,16 @@
+# Automated or Global Policy example
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: PolicyBinding
+metadata:
+  name: auth-global
+spec:
+  targetRef:
+    kind: Selector
+    selector:
+      kind: ApiInstance
+  policyRef:
+    name: http-basic-authentication-flex
+  config:
+    username: foo
+    password: bar

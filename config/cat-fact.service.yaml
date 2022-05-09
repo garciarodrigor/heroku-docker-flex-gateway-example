@@ -1,0 +1,8 @@
+# Service definition example
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: Service
+metadata:
+  name: cat-fact
+spec:
+  address: https://cat-fact.herokuapp.com
