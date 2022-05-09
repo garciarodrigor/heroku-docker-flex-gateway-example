@@ -12,7 +12,7 @@ spec:
   config:
     destinationRef:
       name: cat-fact
-    destinationPath: /facts
   rules:
-  - path: /api/cat(/facts)
+  # Forward /api/facts/cat => /facts
+  - path: /api(/facts)/cat
 
