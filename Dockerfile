@@ -17,10 +17,14 @@ ENV S6_READ_ONLY_ROOT=1 \
 
 COPY entrypoint /etc/cont-init.d/configure
 
-RUN useradd -d /app non-root-user \
-  && mkdir -p /app /var/log /var/run/s6 \
-  && chown non-root-user /app /var/log /var/run/s6 \
-  && rm -rf /var/log && ln -sf /tmp /var/log
+RUN useradd -d /app non-root-user && rm -rf /var/log && ln -sf /tmp /var/log && ln -sf /var/run/s6 /tmp
+  # && mkdir -p /app /var/log /var/run/s6 \
+  # && chown non-root-user /app /var/log /var/run/s6 \
+  # && rm -rf /var/log && ln -sf /tmp /var/log
+
+RUN for file in /etc/services.d/*/*; do \
+chmod a+xwr $file; \
+done
 
 USER non-root-user
 WORKDIR /app
