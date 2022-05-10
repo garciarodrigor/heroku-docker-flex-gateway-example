@@ -1,5 +1,4 @@
 #@kind Template
-#@name /tmp/api.yaml
 # ApiInstance inline definition example
 ---
 apiVersion: gateway.mulesoft.com/v1alpha1
