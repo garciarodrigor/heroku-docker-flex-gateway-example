@@ -52,4 +52,4 @@ FLEX_LOG_LEVEL=${FLEX_LOG_LEVEL:-4}
 
 process "/etc/mulesoft/flex-gateway/conf.d"
 
-exec "$@"
+# exec "$@"
