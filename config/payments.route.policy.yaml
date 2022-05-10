@@ -12,5 +12,6 @@ spec:
   config:
     destinationRef:
       name: payment-service
+    destinationPath: /payments
   rules:
-  - path: /payments.*
+  - path: /api/payments(.*)
