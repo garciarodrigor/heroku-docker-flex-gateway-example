@@ -26,3 +26,7 @@ USER non-root-user
 WORKDIR /app
 
 COPY --chown=non-root-user config/ /etc/mulesoft/flex-gateway/conf.d
+
+ENTRYPOINT [ "" ]
+
+CMD [ "/init" ]
