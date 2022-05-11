@@ -24,7 +24,7 @@ RUN useradd -d /app non-root-user \
 
 USER non-root-user
 WORKDIR /app
-ENTRYPOINT [ "" ]
+ENTRYPOINT [ ]
 CMD [ "/init" ]
 
 COPY --chown=non-root-user config/ /app
