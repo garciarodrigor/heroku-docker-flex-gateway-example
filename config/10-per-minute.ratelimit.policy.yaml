@@ -11,6 +11,7 @@ spec:
       kind: ApiInstance
       labels:
         policy/10-per-minute-ratelimit: "true"
+        policy/message-logging: "true"
   policyRef:
     name: rate-limiting-flex
   config:

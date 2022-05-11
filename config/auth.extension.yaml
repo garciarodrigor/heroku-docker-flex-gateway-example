@@ -1,0 +1,19 @@
+# How to extend an existing extension/policy and setup default values
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: Extension
+metadata:
+  name: auth
+spec:
+  extends:
+    - name: http-basic-authentication-flex
+  properties:
+    username:
+      type: string
+      default: foo
+    password:
+      type: string
+      default: bar
+  required:
+  - username
+  - password
