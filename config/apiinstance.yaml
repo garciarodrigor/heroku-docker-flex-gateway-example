@@ -9,7 +9,7 @@ metadata:
     policy/10-per-minute-ratelimit: "true"
     policy/message-logging: "true"
 spec:
-  address: http://0.0.0.0:${PORT}
+  address: http://0.0.0.0:8081
   services:
     httpbin:
       address: https://httpbin.org:443

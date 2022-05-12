@@ -15,16 +15,21 @@ ENV S6_READ_ONLY_ROOT=1 \
   FLEX_RTM_ARM_AGENT_CONFIG=/app/platform.conf \
   FLEX_CONFIG_DIR=/etc/mulesoft/flex-gateway/conf.d:/app
 
-COPY entrypoint /etc/cont-init.d/configure
 
-RUN useradd -d /app non-root-user \
-  && mkdir -p /app /var/log /var/run/s6 \
-  && chown non-root-user /app /var/log /var/run/s6 \
-  && rm -rf /var/log && ln -sf /tmp /var/log
+# RUN apt update \
+#   && apt -y --no-install-recommends install socat \
+#   && apt clean \
+#   && rm -rf /var/lib/apt/lists/* \
+#   && useradd -d /app non-root-user \
+#   && mkdir -p /app /var/log /var/run/s6 \
+#   && chown non-root-user /app /var/log /var/run/s6 \
+#   && rm -rf /var/log && ln -sf /tmp /var/log
 
-USER non-root-user
+COPY rootfs/ /
+
+# USER non-root-user
 WORKDIR /app
 ENTRYPOINT [ ]
 CMD [ "/init" ]
 
-COPY --chown=non-root-user config/ /app
+COPY config/ /app

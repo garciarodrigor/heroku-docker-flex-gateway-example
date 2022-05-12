@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+SERVICE=$(basename "$PWD")
+PORT=${PORT:-8082}
+FLEX_API_PORT=${FLEX_API_PORT:-8081}
+
+echo "[$SERVICE][info] Forward from $PORT -> $FLEX_API_PORT"
+exec envoy -c "/tmp/envoy-edge.yaml" --use-dynamic-base-id -l warn --log-format "[${SERVICE}][%l] %_" --log-path /dev/stdout  --file-flush-interval-msec "${FLEX_SERVICE_ENVOY_FILE_FLUSH_INTERVAL_MS:-1000}"
