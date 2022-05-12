@@ -1,2 +1,3 @@
 #@kind Template
+#@name /tmp/platform.conf
 $(echo ${PLATFORM_CONF} | base64 -d)
