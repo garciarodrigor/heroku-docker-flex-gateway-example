@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+SERVICE=$(basename "$PWD")
+
+s6-svwait -t 30000 -U /var/run/s6/services/flex-gateway-agent || {
+    echo "[$SERVICE][error] Timeout waiting for agent Ready"
+    exit 1
+}
+
+echo "[$SERVICE][info] Starting"
+exec entr -np s6-svc -ruwr /run/s6/services/flex-gateway-port-fw/ < <(echo /tmp/envoy.json)

@@ -2,8 +2,13 @@
 # shellcheck shell=bash
 
 SERVICE=$(basename "$PWD")
-PORT=${PORT:-8082}
-FLEX_API_PORT=${FLEX_API_PORT:-8081}
 
-echo "[$SERVICE][info] Forward from $PORT -> $FLEX_API_PORT"
-exec envoy -c "/tmp/envoy-edge.yaml" --use-dynamic-base-id -l warn --log-format "[${SERVICE}][%l] %_" --log-path /dev/stdout  --file-flush-interval-msec "${FLEX_SERVICE_ENVOY_FILE_FLUSH_INTERVAL_MS:-1000}"
+s6-svwait -t 30000 -U /var/run/s6/services/flex-gateway-agent || {
+    echo "[$SERVICE][error] Timeout waiting for agent Ready"
+    exit 1
+}
+
+export APIS=$(awk '/Adding ApiInstance/{ split($6, n, "/");m[n[2]] = $7} END { for (i in m) { print i"|"m[i] }}' /var/log/flex-gateway-agent/current | sort -t '/'  -k 4 -r)
+
+echo "[$SERVICE][info] Starting"
+exec dockerize -template /app/envoy-edge.yaml.template:/tmp/envoy-edge.yaml envoy -c "/tmp/envoy-edge.yaml" --use-dynamic-base-id -l warn --log-format "[${SERVICE}][%l] %_" --log-path /dev/stdout  --file-flush-interval-msec "${FLEX_SERVICE_ENVOY_FILE_FLUSH_INTERVAL_MS:-1000}"
