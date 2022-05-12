@@ -28,4 +28,4 @@ static_resources:
             address:
               socket_address:
                 address: 127.0.0.1
-                port_value: ${FLEX_API_PORT}
+                port_value: ${FLEX_API_PORT:-8081}
