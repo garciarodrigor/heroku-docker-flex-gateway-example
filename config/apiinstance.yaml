@@ -5,7 +5,7 @@ kind: ApiInstance
 metadata:
   name: api
   labels:
-    # policy/10-per-minute-ratelimit: "true"
+    policy/10-per-minute-ratelimit: "true"
     policy/message-logging: "true"
 spec:
   address: http://0.0.0.0:8081
