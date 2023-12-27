@@ -1,8 +1,7 @@
 FROM b4fun/dockerize-ubuntu as dockerize
-FROM mulesoft/flex-gateway:1.0.0
+FROM mulesoft/flex-gateway:1.6.0
 
-ENV S6_READ_ONLY_ROOT=1 \
-  FLEX_RTM_ARM_AGENT_CONFIG=/tmp/platform.conf
+ENV S6_READ_ONLY_ROOT=1
 
 WORKDIR /app
 ENTRYPOINT [ ]
