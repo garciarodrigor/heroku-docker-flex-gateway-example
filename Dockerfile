@@ -1,7 +1,8 @@
 FROM b4fun/dockerize-ubuntu as dockerize
 FROM mulesoft/flex-gateway:1.6.0
 
-ENV S6_READ_ONLY_ROOT=1
+ENV S6_READ_ONLY_ROOT=1 \
+  FLEX_DYNAMIC_PORT_VALUE=8081
 
 WORKDIR /app
 ENTRYPOINT [ ]
