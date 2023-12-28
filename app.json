@@ -9,6 +9,16 @@
     "FLEX_REGISTRATION": {
       "description": "file from register step",
       "required": true
+    },
+    "FLEX_SERVICE_ENVOY_CONCURRENCY": {
+      "description": "The number of workers started by the GW (it should be equal to the number of CPU)",
+      "required": false,
+      "value": "1"
+    },
+    "FLEX_DYNAMIC_PORT_VALUE": {
+      "description": "The port used to forward the Heroku traffic (It is the used to expose the API Instance)",
+      "required": false,
+      "value": "8081"
     }
   }
 }
