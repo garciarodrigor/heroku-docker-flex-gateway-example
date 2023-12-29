@@ -2,8 +2,9 @@
 # shellcheck shell=bash
 
 SERVICE=$(basename "$PWD")
-
 CONFIG_FILE="${FLEX_OUTPUT_CONFIG_DIR}/envoy-edge.yaml"
+
+export LISTEN_IP=${HEROKU_PRIVATE_IP:-$(hostname -I | awk '{print $1}')}
 
 echo "[$SERVICE][info] Starting"
 exec dockerize -template "envoy-edge.yaml.template:${CONFIG_FILE}" envoy -c "${CONFIG_FILE}" --use-dynamic-base-id -l warn --log-format "[${SERVICE}][%l] %_" --log-path /dev/stdout  --file-flush-interval-msec "${FLEX_SERVICE_ENVOY_FILE_FLUSH_INTERVAL_MS:-1000}"
