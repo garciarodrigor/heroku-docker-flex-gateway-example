@@ -2,7 +2,7 @@
   "name": "heroku-docker-flex-gateway-example",
   "description": "A barebones Flex Gateway installation using Docker",
   "repository": "https://github.com/garciarodrigor/heroku-docker-flex-gateway-example",
-  "keywords": ["flex", "gateway", "mulesoft", "docker", "proxy"],
+  "keywords": ["flex", "gateway", "mulesoft", "docker", "proxy", "heroku"],
   "stack": "container",
   "website": "https://docs.mulesoft.com/gateway/flex-gateway-overview",
   "env": {
@@ -18,7 +18,12 @@
     "FLEX_DYNAMIC_PORT_VALUE": {
       "description": "The port used to forward the Heroku traffic (It is the used to expose the API Instance)",
       "required": false,
-      "value": "8081"
+      "value": "2020"
+    },
+    "FLEX_NAME": {
+      "description": "FlexGateway name (e.g. Heroku app name) - it will be displayed under Anypoint - Runtime Manager > Replicas",
+      "required": false,
+      "value": "heroku-flex-gateway"
     }
   }
 }
