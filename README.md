@@ -26,8 +26,8 @@ The author of this article makes any warranties about the completeness, reliabil
 8. Go under your Heroku app **Settings** tab and copy your app domain name (close to “Your app can be found at”), append to this URL your API Base path (if configured) and open the resulting link (e.g. with curl) - you should be redirected to the configured Upstream URL
 
 ## Implementation Notes
-- a sidecar envoy tcp proxy is used to forward the Heroku connections on $PORT to the Flex Gateway envoy proxy listening on $FLEX_DYNAMIC_PORT_VALUE
-- to avoid ports clashing between $PORT and the Flex Gateway internal services using 127.0.0.1 interface and several ports (4000,9998,9999,15001,15002,15100), the interface used by the sidecar envoy proxy to listn on $PORT is not 0.0.0.0
+- a sidecar envoy TCP proxy is used to forward the Heroku connections on $PORT to the Flex Gateway envoy proxy listening on $FLEX_DYNAMIC_PORT_VALUE
+- to avoid ports clashing between $PORT and the Flex Gateway internal services using 127.0.0.1 interface and several ports (4000,9998,9999,15001,15002,15100), the interface used by the sidecar envoy proxy to listen on $PORT is not 0.0.0.0
 
 ## Additional Notes
 - Tested with an API having an "IP Allowlist" policy
