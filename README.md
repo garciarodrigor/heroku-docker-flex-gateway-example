@@ -61,4 +61,4 @@ This package has been tested using the following:
 
 
 ## Credits
-Credits to the owner of the original project https://github.com/garciarodrigor I've exchanged with to make it work on Heroku Common Runtime and Private Spaces
+Credits to the [owner](https://github.com/garciarodrigor) of the original project I've exchanged with to make it work on Heroku Common Runtime and Private Spaces
