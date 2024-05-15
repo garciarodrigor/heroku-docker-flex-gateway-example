@@ -23,7 +23,7 @@
     "FLEX_SERVICE_ENVOY_DRAIN_TIME": {
       "description": "The time in seconds that Flex will drain connections when individual apis are being modified or removed. During the drain sequence, the drain manager encourages draining through terminating connections on request completion, sending “Connection: CLOSE” on HTTP1, and sending GOAWAY on HTTP2.",
       "required": false,
-      "value": "1"
+      "value": "30"
     },
     "FLEX_DYNAMIC_PORT_VALUE": {
       "description": "The port used to forward the Heroku traffic (It is the used to expose the API Instance)",
