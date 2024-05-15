@@ -1,14 +1,12 @@
-FROM b4fun/dockerize-ubuntu as dockerize
-FROM mulesoft/flex-gateway:1.6.2
+FROM mulesoft/flex-gateway:1.7.0
 
-ENV S6_READ_ONLY_ROOT=1 \
-  FLEX_DYNAMIC_PORT_VALUE=8081
+ENV FLEX_DYNAMIC_PORT_ENABLE=true \
+  FLEX_DYNAMIC_PORT_ENVAR=PORT \
+  FLEX_DYNAMIC_PORT_VALUE=8081 \
+  FLEX_CONNECTION_IDLE_TIMEOUT_SECONDS=60 \
+  FLEX_STREAM_IDLE_TIMEOUT_SECONDS=300 \
+  FLEX_METRIC_ADDR=tcp://127.0.0.1:2000 \
+  FLEX_SERVICE_ENVOY_DRAIN_TIME=30 \
+  FLEX_SERVICE_ENVOY_CONCURRENCY=1
 
-WORKDIR /app
-ENTRYPOINT [ ]
-CMD [ "/init" ]
-
-COPY --from=dockerize /usr/local/bin/dockerize /usr/local/bin/
-
-COPY rootfs/ /
 COPY config/ /usr/local/share/mulesoft/flex-gateway/conf.d
