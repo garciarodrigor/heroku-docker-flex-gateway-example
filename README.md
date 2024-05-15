@@ -20,7 +20,7 @@ git clone git@github.com:garciarodrigor/heroku-docker-flex-gateway-example.git
 cd heroku-docker-flex-gateway-example
 heroku container:login
 heroku create
-heroku config:set FLEX_REGISTRATION=<registration-content> FLEX_SERVICE_ENVOY_CONCURRENCY=1 FLEX_DYNAMIC_PORT_VALUE=8081
+heroku config:set FLEX_CONFIG=<registration-content> FLEX_SERVICE_ENVOY_CONCURRENCY=1 FLEX_DYNAMIC_PORT_VALUE=8081
 heroku container:push web
 heroku container:release web
 heroku open
