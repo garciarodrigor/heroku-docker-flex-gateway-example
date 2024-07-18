@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# shellcheck shell=bash
-
-exec /usr/local/bin/flex-agent

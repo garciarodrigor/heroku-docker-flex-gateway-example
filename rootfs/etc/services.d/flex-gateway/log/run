@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# shellcheck shell=bash
-
-exec s6-log -b n2 s10000000 1 "${FLEX_OUTPUT_CONFIG_DIR}/logs"

@@ -4,21 +4,37 @@
   "repository": "https://github.com/garciarodrigor/heroku-docker-flex-gateway-example",
   "keywords": ["flex", "gateway", "mulesoft", "docker", "proxy", "heroku"],
   "stack": "container",
+  "image": "mulesoft/flex-gateway:1.7.1",
   "website": "https://docs.mulesoft.com/gateway/flex-gateway-overview",
   "env": {
-    "FLEX_REGISTRATION": {
+    "FLEX_CONFIG": {
       "description": "file from register step",
       "required": true
+    },
+    "FLEX_CONNECTION_IDLE_TIMEOUT_SECONDS": {
+      "description": "Defines the connection idle timeout of all apis. It should be the number of seconds.",
+      "required": false,
+      "value": "60"
+    },
+    "FLEX_STREAM_IDLE_TIMEOUT_SECONDS": {
+      "description": "Stream idle timeout of all APIs It should be the number of seconds.",
+      "required": false,
+      "value": "300"
+    },
+    "FLEX_SERVICE_ENVOY_DRAIN_TIME": {
+      "description": "The time in seconds that Flex will drain connections when individual apis are being modified or removed. During the drain sequence, the drain manager encourages draining through terminating connections on request completion, sending “Connection: CLOSE” on HTTP1, and sending GOAWAY on HTTP2.",
+      "required": false,
+      "value": "30"
+    },
+    "FLEX_DYNAMIC_PORT_VALUE": {
+      "description": "The port used to forward the Heroku traffic (It is the used to expose the API Instance)",
+      "required": false,
+      "value": "8081"
     },
     "FLEX_SERVICE_ENVOY_CONCURRENCY": {
       "description": "The number of workers started by the GW (it should be equal to the number of CPU)",
       "required": false,
       "value": "1"
-    },
-    "FLEX_DYNAMIC_PORT_VALUE": {
-      "description": "The port used to forward the Heroku traffic (It is the used to expose the API Instance)",
-      "required": false,
-      "value": "2020"
     }
   }
 }
