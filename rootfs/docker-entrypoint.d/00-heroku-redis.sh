@@ -22,6 +22,6 @@ spec:
      address: "${REDIS_ADDRESS}"
      username: ""
      password: "${REDIS_PASSWORD}"
-     DB: 7
+     db: 0
 EOF
 fi
