@@ -15,15 +15,15 @@ if [ -n "$REDIS_URL" ]; then
 apiVersion: gateway.mulesoft.com/v1alpha1
 kind: Configuration
 metadata:
- name: shared-storage-redis
+  name: shared-storage-redis
 spec:
- sharedStorage:
-   redis:
-     address: "${REDIS_ADDRESS}"
-     username: ""
-     password: "${REDIS_PASSWORD}"
-     db: 0
-     tls:
-      skipValidation: true
+  sharedStorage:
+    redis:
+      address: "${REDIS_ADDRESS}"
+      username: ""
+      password: "${REDIS_PASSWORD}"
+      db: 0
+      tls:
+        skipValidation: true
 EOF
 fi
