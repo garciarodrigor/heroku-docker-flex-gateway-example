@@ -23,5 +23,7 @@ spec:
      username: ""
      password: "${REDIS_PASSWORD}"
      db: 0
+     tls:
+      skipValidation: true
 EOF
 fi
