@@ -9,7 +9,11 @@ ENV FLEX_DYNAMIC_PORT_ENABLE=true \
   FLEX_SERVICE_ENVOY_DRAIN_TIME=30 \
   FLEX_SERVICE_ENVOY_CONCURRENCY=1
 
-COPY --chown=0:0 --chmod=770 rootfs/ /
+COPY rootfs/ /
+
+USER root
+RUN install -d -m 777 /usr/local/share/mulesoft/flex-gateway/conf.d/
+USER 65532:0
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/init"]
