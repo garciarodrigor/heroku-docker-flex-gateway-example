@@ -1,0 +1,21 @@
+# Automated or Global Policy example applied by label
+---
+apiVersion: gateway.mulesoft.com/v1alpha1
+kind: PolicyBinding
+metadata:
+  name: 10-per-minute-ratelimit
+spec:
+  targetRef:
+    kind: Selector
+    selector:
+      kind: ApiInstance
+      labels:
+        policy/10-per-minute-ratelimit: "true"
+  policyRef:
+    name: rate-limiting-flex
+  config:
+    rateLimits:
+    - timePeriodInMilliseconds: 60000
+      maximumRequests: 10
+    exposeHeaders: true
+    clusterizable: true
