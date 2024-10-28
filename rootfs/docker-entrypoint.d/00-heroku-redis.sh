@@ -2,15 +2,30 @@
 # shellcheck shell=sh
 # Setup Flex Redis Shared Storage
 
+HEROKU_REDIS_CONFIG_PATH=${HEROKU_REDIS_CONFIG_PATH:-/usr/local/share/mulesoft/flex-gateway/conf.d/shared-storage-redis.configuration.yaml}
+
+_log() {
+    if [ "$ENTRYPOINT_LOGS_ENABLED" = 'true' ]; then
+        echo "$@"
+    fi
+}
+
+# This regular expression is used to parse and extract information
+# from a Redis connection string in the format "rediss://user:password@host:port".
+#
+# - "^rediss://" is the starting point of the string, indicating that it begins with the protocol "rediss://".
+# - "([^:]*)" captures any characters that are not a colon ":" zero or more times, representing the username in the connection string.
+# - "([^@]+)" captures any characters that are not an "@" symbol one or more times, representing the password in the connection string.
+# - "@([^/]+)" captures any characters that are not a forward slash "/" one or more times, representing the host or server address in the connection string.
+regex="^rediss:\/\/([^:]*):([^@]+)@([^\/]+)"
 if [ -n "$REDIS_URL" ]; then
-  # Extract password (between '://' and '@')
-  REDIS_PASSWORD=$(echo "$REDIS_URL" | sed -E 's/^rediss:\/\/:([^@]+)@.*$/\1/')
+  REDIS_USER=$(echo "$REDIS_URL" | sed -E "s/$regex/\1/")
+  REDIS_PASSWORD=$(echo "$REDIS_URL" | sed -E "s/$regex/\2/")
+  REDIS_ADDRESS=$(echo "$REDIS_URL" | sed -E "s/$regex/\3/")
 
-  # Extract address (after '@' to end, split address and port by ':')
-  REDIS_ADDRESS=$(echo "$REDIS_URL" | sed -E 's/^rediss:\/\/:[^@]+@([^:]+):([0-9]+)$/\1:\2/')
+  _log "$0: Setup Flex Shared Storage, using REDIS located in '${REDIS_ADDRESS}'"
 
-  # Set environment variables for the current shell session
-  cat <<EOF > /usr/local/share/mulesoft/flex-gateway/conf.d/shared-storage-redis.configuration.yaml
+  cat <<EOF > "${HEROKU_REDIS_CONFIG_PATH}"
 ---
 apiVersion: gateway.mulesoft.com/v1alpha1
 kind: Configuration
@@ -20,7 +35,7 @@ spec:
   sharedStorage:
     redis:
       address: "${REDIS_ADDRESS}"
-      username: ""
+      username: "${REDIS_USER}"
       password: "${REDIS_PASSWORD}"
       tls:
         skipValidation: true
