@@ -22,8 +22,9 @@ spec:
       address: "${REDIS_ADDRESS}"
       username: ""
       password: "${REDIS_PASSWORD}"
-      db: 0
       tls:
         skipValidation: true
+        minVersion: "1.1"
+        maxVersion: "1.3"
 EOF
 fi
